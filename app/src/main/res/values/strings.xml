@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ImageProcess</string>
+    <string name="btn_txt">修改颜色</string>
+</resources>

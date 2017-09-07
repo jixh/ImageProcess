@@ -1,6 +1,7 @@
 package com.jktaihe.imageprocess;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.jktaihe.imageutils.BitmapUtils;
+import com.vongihealth.walllibrary.WallAdapter;
 
 public class MainActivity extends AppCompatActivity {
     ImageView iv;
@@ -27,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
 //                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
 //                iv.setImageBitmap(BitmapUtils.processImage(bitmap,getResources().getColor(R.color.bitmapColor)));
 //                changeIcon();
+            }
+        });
+        findViewById(R.id.wallBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, WallActivity.class));
             }
         });
     }

@@ -33,4 +33,13 @@
         android:gravity="center"
         />
 
+    <Button
+        android:id="@+id/wallBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="照片墙"
+        android:textSize="16sp"
+        android:gravity="center"
+        />
+
 </LinearLayout>

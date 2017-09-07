@@ -27,5 +27,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:$buildToolsVersion"
     testCompile 'junit:junit:4.12'
     compile project(':imageutils')
+    implementation project(':walllibrary')
 }
 

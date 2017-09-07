@@ -1,5 +1,6 @@
 package com.vongihealth.walllibrary;
 
+import android.content.Context;
 import android.view.View;
 
 /**
@@ -8,5 +9,5 @@ import android.view.View;
 
 public interface WallAdapter {
     int getCount();
-    View getView(int position);
+    View getView(Context context,int position);
 }

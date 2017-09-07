@@ -46,24 +46,33 @@ public class WallView extends LinearLayout {
     private void initView() {
         setOrientation(VERTICAL);
         if (mWallAdapter != null){
+
             mModel = new Model(mWallAdapter.getCount());
+
             Cell cell;
+            Cell lastCell = null;
+
             for (int i = 0; i <  mWallAdapter.getCount(); i++) {
+
                 cell = mModel.getCells().get(i);
+
                  if (getChildAt(cell.getRow()) == null){
                         LinearLayout linearLayout = new LinearLayout(this.getContext());
                         linearLayout.setOrientation(HORIZONTAL);
                         addView(linearLayout,new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (cell.getHight()* height)));
                  }
 
-                 if (cell.getLayer() == 1){
-                     LinearLayout layerLL = new LinearLayout(this.getContext());
-                     layerLL.setOrientation(VERTICAL);
-                     ((LinearLayout)getChildAt(cell.getRow())).addView(layerLL,new LayoutParams((int)(cell.getWidth()*width), ViewGroup.LayoutParams.MATCH_PARENT));
-                 }
-
-
-                ((LinearLayout)getChildAt(cell.getRow())).addView(mWallAdapter.getView(i),(int)(cell.getWidth()*width),(int)(cell.getHight()*height));
+                 if (cell.getLayer() == 1 ){
+                     if (lastCell != null && lastCell.getLayer() != 1 ){
+                         LinearLayout layerLL = new LinearLayout(this.getContext());
+                         layerLL.setOrientation(VERTICAL);
+                         ((LinearLayout)getChildAt(cell.getRow())).addView(layerLL,new LayoutParams((int)(cell.getWidth()*width), ViewGroup.LayoutParams.MATCH_PARENT));
+                     }
+                     ((LinearLayout)((LinearLayout)getChildAt(cell.getRow())).getChildAt(((LinearLayout)getChildAt(cell.getRow())).getChildCount()-1))
+                        .addView(mWallAdapter.getView(WallView.this.getContext(),i),(int)(cell.getWidth()*width),(int)(cell.getHight()*height));
+                 }else
+                ((LinearLayout)getChildAt(cell.getRow())).addView(mWallAdapter.getView(WallView.this.getContext(),i),(int)(cell.getWidth()*width),(int)(cell.getHight()*height));
+                 lastCell = cell;
             }
         }
     }

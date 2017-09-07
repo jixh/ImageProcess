@@ -26,13 +26,14 @@ public class WallActivity extends AppCompatActivity {
 
             @Override
             public int getCount() {
-                return 9;
+                return 1;
             }
 
             @Override
             public View getView(Context context,int position) {
                 ImageView imageView = new ImageView(context);
-                imageView.setImageResource(R.mipmap.test);
+                imageView.setImageResource(R.drawable.ic_launcher);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 return imageView;
             }
         });

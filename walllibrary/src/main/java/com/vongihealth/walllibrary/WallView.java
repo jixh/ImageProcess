@@ -3,11 +3,9 @@ package com.vongihealth.walllibrary;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 /**
  * Created by hzjixiaohui on 2017-9-7.
@@ -20,6 +18,7 @@ public class WallView extends LinearLayout {
     private int width;// view的高度
     private int height;// view的宽度
     private Model mModel;
+    private int cellMargin;
 
     public WallView(Context context) {
         this(context, null);
@@ -37,13 +36,14 @@ public class WallView extends LinearLayout {
             public boolean onPreDraw() {
                 height = getMeasuredHeight();
                 width = getMeasuredWidth();
-                initView();
                 return true;
             }
         });
     }
 
     private void initView() {
+
+        setPadding(cellMargin,cellMargin,cellMargin,cellMargin);
 
         setOrientation(VERTICAL);
 
@@ -71,7 +71,6 @@ public class WallView extends LinearLayout {
                          layerLL.setOrientation(VERTICAL);
                          ((LinearLayout)getChildAt(cell.getRow() - 1)).addView(layerLL,(int)(cell.getWidth()*width),(int) (lastCell.getHight()* height));
                      }
-
                      addView(layerLL,cell,i);
                  }else{
                      addView(((LinearLayout)getChildAt(cell.getRow() - 1)),cell,i);
@@ -80,12 +79,15 @@ public class WallView extends LinearLayout {
 
                 lastCell = cell;
             }
+            notifyAll();
         }
     }
 
 
     private void addView(LinearLayout linearLayout,Cell cell,int position){
-        linearLayout.addView(mWallAdapter.getView(WallView.this.getContext(),position),(int)(cell.getWidth()*width),(int)(cell.getHight()*height));
+        LinearLayout.LayoutParams layoutParams = new LayoutParams((int)(cell.getWidth()*width),(int)(cell.getHight()*height));
+        layoutParams.setMargins(cellMargin,cellMargin,cellMargin,cellMargin);
+        linearLayout.addView(mWallAdapter.getView(linearLayout.getContext(),position),layoutParams);
     }
 
 
@@ -95,8 +97,11 @@ public class WallView extends LinearLayout {
 
     public void setmWallAdapter(WallAdapter mWallAdapter) {
         this.mWallAdapter = mWallAdapter;
+        initView();
     }
 
 
-
+    public void setCellMargin(int cellMargin) {
+        this.cellMargin = cellMargin;
+    }
 }

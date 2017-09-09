@@ -1,8 +1,11 @@
 package com.vongihealth.walllibrary;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
@@ -19,7 +22,7 @@ public class WallView extends LinearLayout {
     private int height;// view的宽度
     private Model mModel;
     private int cellMargin;
-
+    private boolean isDraw = false;
     public WallView(Context context) {
         this(context, null);
     }
@@ -34,22 +37,33 @@ public class WallView extends LinearLayout {
         getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                height = getMeasuredHeight();
-                width = getMeasuredWidth();
+                if (!isDraw){
+                    height = getMeasuredHeight();
+                    width = getMeasuredWidth();
+
+                    initView();
+                    isDraw = true;
+                }
+
                 return true;
             }
         });
     }
 
+
     private void initView() {
 
-        setPadding(cellMargin,cellMargin,cellMargin,cellMargin);
+        Log.i("WallView","initView");
+
+        width = height = Math.min(width,height);
+
+//        setPadding(cellMargin,cellMargin,cellMargin,cellMargin);
 
         setOrientation(VERTICAL);
 
         if (mWallAdapter != null){
 
-            mModel = new Model(mWallAdapter.getCount());
+            mModel = new Model(mWallAdapter.getCount(),width,cellMargin);
 
             Cell cell;
             Cell lastCell = null;
@@ -59,34 +73,38 @@ public class WallView extends LinearLayout {
 
                 cell = mModel.getCells().get(i);
 
-                 if (getChildAt(cell.getRow() - 1) == null){
-                        LinearLayout linearLayout = new LinearLayout(this.getContext());
-                        linearLayout.setOrientation(HORIZONTAL);
-                        addView(linearLayout,new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (cell.getHight()* height)));
-                 }
+                LinearLayout firstLayer = (LinearLayout) getChildAt(cell.getRow() - 1);
+
+                if (firstLayer == null) {
+                    firstLayer = new LinearLayout(this.getContext());
+                    firstLayer.setGravity(Gravity.CENTER_VERTICAL);
+                    firstLayer.setOrientation(HORIZONTAL);
+                    addView(firstLayer, new LayoutParams(width, (int) (cell.getHight() + 2* cellMargin)));
+                }
 
                  if (cell.getLayer() == 1 ){
                      if (lastCell != null && lastCell.getLayer() != 1 ){
                          layerLL = new LinearLayout(this.getContext());
                          layerLL.setOrientation(VERTICAL);
-                         ((LinearLayout)getChildAt(cell.getRow() - 1)).addView(layerLL,(int)(cell.getWidth()*width),(int) (lastCell.getHight()* height));
+//                         firstLayer.setGravity(Gravity.CENTER_HORIZONTAL);
+                         firstLayer.addView(layerLL,new LayoutParams((int)(cell.getWidth()+2*cellMargin),  (int)(lastCell.getHight()+2*cellMargin)));
                      }
                      addView(layerLL,cell,i);
                  }else{
-                     addView(((LinearLayout)getChildAt(cell.getRow() - 1)),cell,i);
+                     addView(firstLayer,cell,i);
                      if (layerLL != null) layerLL = null;
                  }
 
                 lastCell = cell;
             }
-            notifyAll();
         }
     }
 
 
     private void addView(LinearLayout linearLayout,Cell cell,int position){
-        LinearLayout.LayoutParams layoutParams = new LayoutParams((int)(cell.getWidth()*width),(int)(cell.getHight()*height));
+        LinearLayout.LayoutParams layoutParams = new LayoutParams((int)cell.getWidth(),(int)cell.getHight());
         layoutParams.setMargins(cellMargin,cellMargin,cellMargin,cellMargin);
+        layoutParams.gravity = Gravity.CENTER;
         linearLayout.addView(mWallAdapter.getView(linearLayout.getContext(),position),layoutParams);
     }
 
@@ -97,11 +115,21 @@ public class WallView extends LinearLayout {
 
     public void setmWallAdapter(WallAdapter mWallAdapter) {
         this.mWallAdapter = mWallAdapter;
-        initView();
     }
 
 
     public void setCellMargin(int cellMargin) {
         this.cellMargin = cellMargin;
+    }
+
+
+    public static String getRandomColor(int i){
+        return "#"+ i+ (9-i)+ 0 + i+ (9-i)+i;
+    }
+
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 }

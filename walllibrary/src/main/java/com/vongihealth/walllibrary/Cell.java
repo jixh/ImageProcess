@@ -7,8 +7,8 @@ package com.vongihealth.walllibrary;
 public class Cell {
     private int row;
     private int layer = 0;
-    public double width;
-    public double hight;
+    private double width;
+    private double hight;
 
     public Cell(int row,double width, double hight) {
         this.width = width;

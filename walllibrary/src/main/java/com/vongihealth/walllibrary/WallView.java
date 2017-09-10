@@ -22,7 +22,7 @@ public class WallView extends LinearLayout {
     private int width;// view的高度
     private int height;// view的宽度
     private Model mModel;
-    private int cellMargin;//
+    private int cellMargin;
     private boolean isDraw = false;
     public WallView(Context context) {
         this(context, null);
@@ -101,12 +101,6 @@ public class WallView extends LinearLayout {
     public void setDevider(int devider) {
         this.cellMargin = DensityUtils.dip2px(this.getContext(), devider /2);
     }
-
-
-    public static String getRandomColor(int i){
-        return "#"+ i+ (9-i)+ 0 + i+ (9-i)+i;
-    }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

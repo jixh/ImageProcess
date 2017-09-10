@@ -12,9 +12,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.vongihealth.walllibrary.WallAdapter;
 import com.vongihealth.walllibrary.WallView;
-
-import static com.vongihealth.walllibrary.WallView.getRandomColor;
-
 /**
  * Created by hzjixiaohui on 2017-9-7.
  */
@@ -33,14 +30,12 @@ public class WallActivity extends AppCompatActivity {
 
             @Override
             public int getCount() {
-                return 9;
+                return 6;
             }
 
             @Override
             public View getView(Context context, final int position) {
                 ImageView imageView = new ImageView(context);
-                imageView.setImageResource(R.drawable.ic_launcher);
-                imageView.setBackgroundColor(Color.parseColor(getRandomColor(position)));
                 imageView.setScaleType(ImageView.ScaleType.CENTER);
                 Glide
                         .with(context)

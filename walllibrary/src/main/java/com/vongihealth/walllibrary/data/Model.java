@@ -1,4 +1,4 @@
-package com.vongihealth.walllibrary;
+package com.vongihealth.walllibrary.data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,39 +39,39 @@ public class Model {
             cells.add(new Cell(2,1/3d*getLength(3),1/3d*getLength(2)));
         }
         else if (nums == 6){
-            cells.add(new Cell(1,2/3d*getLength(3)+2*margin,2/3d*getLength(3)));
+            cells.add(new Cell(1,2/3d*getLength(3)+2*margin,2/3d*getLength(3)+2*margin));
             cells.add(new Cell(1,1,1/3d*getLength(3),1/3d*getLength(3)));
             cells.add(new Cell(1,1,1/3d*getLength(3),1/3d*getLength(3)));
             cells.add(new Cell(2,1/3d*getLength(3),1/3d*getLength(3)));
             cells.add(new Cell(2,1/3d*getLength(3),1/3d*getLength(3)));
             cells.add(new Cell(2,1/3d*getLength(3),1/3d*getLength(3)));
         }else if (nums == 7){
-            cells.add(new Cell(1,1/2d,1/2d));
-            cells.add(new Cell(1,1/2d,1/2d));
-            cells.add(new Cell(2,1/2d,1/4d));
-            cells.add(new Cell(2,1/2d,1/4d));
-            cells.add(new Cell(3,1/3d,1/4d));
-            cells.add(new Cell(3,1/3d,1/4d));
-            cells.add(new Cell(3,1/3d,1/4d));
+            cells.add(new Cell(1,1/2d*getLength(2),1/2d*getLength(3)+ 2*margin));
+            cells.add(new Cell(1,1/2d*getLength(2),1/2d*getLength(3)+ 2*margin));
+            cells.add(new Cell(2,1/2d*getLength(2),1/4d*getLength(3)));
+            cells.add(new Cell(2,1/2d*getLength(2),1/4d*getLength(3)));
+            cells.add(new Cell(3,1/3d*getLength(3),1/4d*getLength(3)));
+            cells.add(new Cell(3,1/3d*getLength(3),1/4d*getLength(3)));
+            cells.add(new Cell(3,1/3d*getLength(3),1/4d*getLength(3)));
         }else if (nums == 8){
-            cells.add(new Cell(1,1/2d,1/3d));
-            cells.add(new Cell(1,1/2d,1/4d));
-            cells.add(new Cell(1,1/2d,1/4d));
-            cells.add(new Cell(2,1/2d,1/2d));
-            cells.add(new Cell(2,1/2d,1/2d));
-            cells.add(new Cell(3,1/4d,1/4d));
-            cells.add(new Cell(3,1/4d,1/4d));
-            cells.add(new Cell(3,1/2d,1/4d));
+            cells.add(new Cell(1,1/2d*getLength(4)+2*margin,1/4d*getLength(4)));
+            cells.add(new Cell(1,1/4d*getLength(4),1/4d*getLength(4)));
+            cells.add(new Cell(1,1/4d*getLength(4),1/4d*getLength(4)));
+            cells.add(new Cell(2,1/2d*getLength(4)+2*margin,1/2d*getLength(4)+2*margin));
+            cells.add(new Cell(2,1/2d*getLength(4)+2*margin,1/2d*getLength(4)+2*margin));
+            cells.add(new Cell(3,1/4d*getLength(4),1/4d*getLength(4)));
+            cells.add(new Cell(3,1/4d*getLength(4),1/4d*getLength(4)));
+            cells.add(new Cell(3,1/2d*getLength(4)+2*margin,1/4d*getLength(4)));
         }else if (nums == 9){
-            cells.add(new Cell(1,2/3d,1/2d));
-            cells.add(new Cell(1,1,1/3,1/4d));
-            cells.add(new Cell(1,1,1/3,1/4d));
-            cells.add(new Cell(2,1/3d,1/4d));
-            cells.add(new Cell(2,1/3d,1/4d));
-            cells.add(new Cell(2,1/3d,1/4d));
-            cells.add(new Cell(3,1/3d,1/4d));
-            cells.add(new Cell(3,1/3d,1/4d));
-            cells.add(new Cell(3,1/3d,1/4d));
+            cells.add(new Cell(1,2/3d*getLength(3)+2*margin,1/2d*getLength(4)+2*margin));
+            cells.add(new Cell(1,1,1/3d*getLength(3),1/4d*getLength(4)));
+            cells.add(new Cell(1,1,1/3d*getLength(3),1/4d*getLength(4)));
+            cells.add(new Cell(2,1/3d*getLength(3),1/4d*getLength(4)));
+            cells.add(new Cell(2,1/3d*getLength(3),1/4d*getLength(4)));
+            cells.add(new Cell(2,1/3d*getLength(3),1/4d*getLength(4)));
+            cells.add(new Cell(3,1/3d*getLength(3),1/4d*getLength(4)));
+            cells.add(new Cell(3,1/3d*getLength(3),1/4d*getLength(4)));
+            cells.add(new Cell(3,1/3d*getLength(3),1/4d*getLength(4)));
         }
     }
 

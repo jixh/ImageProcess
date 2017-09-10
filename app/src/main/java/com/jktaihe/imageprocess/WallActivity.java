@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.vongihealth.walllibrary.WallAdapter;
@@ -20,8 +21,6 @@ import static com.vongihealth.walllibrary.WallView.getRandomColor;
 
 public class WallActivity extends AppCompatActivity {
 
-    public static final
-    String img =  "http://i.meizitu.net/2017/09/08b0";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,26 +28,36 @@ public class WallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wall);
 
         WallView wallView = findViewById(R.id.wallView);
-        wallView.setCellMargin(4);
+        wallView.setDevider(4);
         wallView.setmWallAdapter(new WallAdapter() {
 
             @Override
             public int getCount() {
-                return 6;
+                return 9;
             }
 
             @Override
-            public View getView(Context context, int position) {
+            public View getView(Context context, final int position) {
                 ImageView imageView = new ImageView(context);
                 imageView.setImageResource(R.drawable.ic_launcher);
                 imageView.setBackgroundColor(Color.parseColor(getRandomColor(position)));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//                Glide
-//                        .with(context)
-//                        .load(img+(position + 1)+".jpg")
-//                        .into(imageView);
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
+                Glide
+                        .with(context)
+                        .load("http://pic39.nipic.com/20140312/18085061_092729513131_2.jpg")
+                        .into(imageView);
+
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(view.getContext(),"this is click "+position,Toast.LENGTH_SHORT).show();
+                    }
+                });
                 return imageView;
             }
         });
+
+
+
     }
 }

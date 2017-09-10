@@ -1,4 +1,4 @@
-package com.vongihealth.walllibrary;
+package com.vongihealth.walllibrary.data;
 
 /**
  * Created by hzjixiaohui on 2017-9-7.
